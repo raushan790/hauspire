@@ -1,65 +1,110 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <header className="hero">
+        <div className="container">
+          <div className="hero-content glass-panel">
+            <h1>We design thoughtful, <br/>livable spaces.</h1>
+            <p>
+              We blend style with functionality to create environments you’ll truly love to live in. 
+              From concept to completion, every detail is thoughtfully designed.
+            </p>
+            <div className="hero-actions">
+              <a href="#projects" className="btn btn-primary">Discover More</a>
+              <a href="/contact" className="btn btn-secondary">Book Consultation</a>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </header>
+
+      <style>{`
+        .hero {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          /* We will replace this with a real hero image from the portfolio later */
+          background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+          position: relative;
+        }
+        
+        .hero-content {
+          max-width: 650px;
+          padding: 3rem;
+          color: white;
+          animation: slideUp 0.8s ease-out forwards;
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        .hero-content h1 {
+          font-size: 3.5rem;
+          margin-bottom: 1.5rem;
+          line-height: 1.1;
+        }
+
+        .hero-content p {
+          font-size: 1.25rem;
+          margin-bottom: 2.5rem;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .btn {
+          padding: 1rem 2rem;
+          border-radius: 50px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          display: inline-block;
+        }
+
+        .btn-primary {
+          background-color: var(--primary);
+          color: white;
+          border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+          background-color: var(--primary-hover);
+          border-color: var(--primary-hover);
+          transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+          background-color: transparent;
+          color: white;
+          border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+          background-color: white;
+          color: var(--foreground);
+          transform: translateY(-2px);
+        }
+
+        @keyframes slideUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-content {
+            padding: 2rem;
+          }
+          .hero-content h1 {
+            font-size: 2.5rem;
+          }
+          .hero-actions {
+            flex-direction: column;
+          }
+        }
+      `}</style>
+    </main>
   );
 }
