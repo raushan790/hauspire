@@ -174,21 +174,21 @@ export default function Home() {
               </div>
             </div>
             <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1512918766671-ad650b9b73ad?auto=format&fit=crop&q=80&w=800" alt="Mediterranean" />
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" alt="Mediterranean" />
               <div className="gallery-overlay">
                 <h3>Mediterranean</h3>
                 <span className="cat">Interior</span>
               </div>
             </div>
             <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&q=80&w=800" alt="Rustic" />
+              <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80&w=800" alt="Rustic" />
               <div className="gallery-overlay">
                 <h3>Rustic</h3>
                 <span className="cat">Interior</span>
               </div>
             </div>
             <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800" alt="Minimalism" />
+              <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800" alt="Minimalism" />
               <div className="gallery-overlay">
                 <h3>Minimalism</h3>
                 <span className="cat">Interior</span>
@@ -645,7 +645,7 @@ export default function Home() {
 
         .testimonial-slider {
           position: relative;
-          min-height: 250px;
+          min-height: 200px;
           margin-top: 4rem;
         }
 
@@ -693,12 +693,17 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
-          .hero-title { font-size: 3.5rem; }
+          .hero-title { font-size: 2.8rem; }
+          .hero-subtitle { font-size: 1rem; }
           .hero-actions { flex-direction: column; }
-          .btn { width: 100%; text-align: center; }
+          .btn { text-align: center; }
+          .services-section { padding: 5rem 1.5rem; }
           .services-grid-mini { grid-template-columns: 1fr; }
+          .gallery-section { padding: 5rem 0; }
           .masonry-gallery { grid-template-columns: 1fr; grid-auto-rows: 250px; }
-          .quote { font-size: 1.4rem; }
+          .testimonial-section { padding: 5rem 1rem; }
+          .quote { font-size: 1.25rem; }
+          .stats-section { padding: 5rem 1rem; background-attachment: scroll; }
         }
       `}</style>
     </main>
