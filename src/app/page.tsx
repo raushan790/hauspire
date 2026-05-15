@@ -4,58 +4,83 @@ import Link from "next/link";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  const slides = [
+  const heroSlides = [
     {
-      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=2000",
-      title: "Thoughtful Livable Spaces.",
+      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=2500",
+      title: "Design Delights",
+      subtitle: "We design thoughtful, livable spaces."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2500",
+      title: "Your Vision, Realized",
       subtitle: "Blending style with functionality."
     },
     {
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000",
-      title: "Premium Interior Design.",
-      subtitle: "Crafting environments you truly love."
+      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=2500",
+      title: "Pune's Finest",
+      subtitle: "Creating environments you truly love."
+    }
+  ];
+
+  const testimonials = [
+    {
+      text: "The design by Hauspire exceeded my expectations. They brought innovative ideas and quality workmanship that made all the difference.",
+      author: "Pooja Deshmukh"
     },
     {
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=2000",
-      title: "Architectural Excellence.",
-      subtitle: "From concept to flawless completion."
+      text: "Hauspire transformed my living room into a modern yet cozy space. Their attention to detail is impeccable. Highly recommend!",
+      author: "Sneha Sharma"
+    },
+    {
+      text: "From consultation to execution, Hauspire ensured a seamless experience. My bedroom now feels like a luxurious retreat.",
+      author: "Niharika Rao"
     }
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    const heroTimer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 6000);
+    return () => clearInterval(heroTimer);
+  }, [heroSlides.length]);
+
+  useEffect(() => {
+    const testTimer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+    return () => clearInterval(testTimer);
+  }, [testimonials.length]);
 
   return (
     <main className="home-wrapper">
-      {/* Hero Slider Section */}
-      <section className="hero-slider">
-        {slides.map((slide, index) => (
+      {/* 1. HERO SLIDER */}
+      <section className="hero-section">
+        {heroSlides.map((slide, index) => (
           <div 
             key={index}
-            className={`slide ${index === currentSlide ? "active" : ""}`}
-            style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${slide.image})` }}
+            className={`hero-slide ${index === currentSlide ? "active" : ""}`}
+            style={{ backgroundImage: `url(${slide.image})` }}
           >
-            <div className="slide-content container">
-              <h1 className="slide-title">{slide.title}</h1>
-              <p className="slide-subtitle">{slide.subtitle}</p>
-              <div className="hero-actions">
-                <Link href="/projects" className="btn btn-primary">Discover Projects</Link>
-                <Link href="/contact" className="btn btn-outline">Book Consultation</Link>
+            <div className="hero-overlay"></div>
+            <div className="hero-content container">
+              <span className="hero-tagline fade-up-1">Welcome to Hauspire</span>
+              <h1 className="hero-title fade-up-2">{slide.title}</h1>
+              <p className="hero-subtitle fade-up-3">{slide.subtitle}</p>
+              <div className="hero-actions fade-up-4">
+                <Link href="/contact" className="btn btn-gold">Book For Consultation</Link>
+                <Link href="/projects" className="btn btn-transparent">Discover More</Link>
               </div>
             </div>
           </div>
         ))}
         
-        <div className="slider-nav">
-          {slides.map((_, index) => (
+        <div className="slider-indicators">
+          {heroSlides.map((_, index) => (
             <button 
               key={index} 
-              className={`nav-dot ${index === currentSlide ? "active" : ""}`}
+              className={`indicator-dot ${index === currentSlide ? "active" : ""}`}
               onClick={() => setCurrentSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -63,173 +88,211 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Overview Section */}
-      <section className="about-overview container">
-        <div className="about-content">
-          <span className="section-label">Our Philosophy</span>
-          <h2>Spaces that feel designed, not decorated.</h2>
-          <p>
-            Curated materials, precise planning, and timeless detailing—crafted for homes 
-            and commercial spaces. We believe the most successful projects are born from a true partnership.
-          </p>
-          <Link href="/about" className="link-arrow">Learn more about us &rarr;</Link>
-        </div>
-        <div className="about-stats">
-          <div className="stat">
-            <span className="stat-num">30K+</span>
-            <span className="stat-label">Happy Clients</span>
+      {/* 2. AWARDS & RECOGNITION (Stats) */}
+      <section className="stats-section bg-dark text-white">
+        <div className="container">
+          <div className="stats-header">
+            <span className="section-subtitle gold-text">Awards & Recognitions</span>
+            <h2>Our relentless dedication to excellence</h2>
+            <p>
+              By integrating cutting-edge business insights, multidisciplinary expertise, 
+              and stringent design principles, we continuously break new ground in creativity. 
+              As leaders in the industry in Pune, we take immense pride in enhancing lives 
+              through exceptional interior design solutions.
+            </p>
           </div>
-          <div className="stat">
-            <span className="stat-num">420+</span>
-            <span className="stat-label">Projects Completed</span>
-          </div>
-          <div className="stat">
-            <span className="stat-num">1986</span>
-            <span className="stat-label">Established</span>
+          <div className="stats-grid">
+            <div className="stat-box">
+              <span className="stat-number">100+</span>
+              <span className="stat-label">Awards Won</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-number">300+</span>
+              <span className="stat-label">Happy Clients</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-number">200</span>
+              <span className="stat-label">Projects Completed</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-number">50+</span>
+              <span className="stat-label">Expert Designers</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="services-section">
-        <div className="container">
-          <div className="section-header-inline">
-            <div>
-              <span className="section-label">Expertise</span>
-              <h2>Our Specialized Services</h2>
+      {/* 3. WHY CHOOSE US & SERVICES */}
+      <section className="services-section container">
+        <div className="two-col-layout">
+          <div className="text-col">
+            <span className="section-subtitle">What We Do</span>
+            <h2>Why choose us</h2>
+            <p className="lead-text">
+              At Hauspire, we blend creativity and functionality to craft personalized 
+              interior designs tailored to your style and needs. With premium materials, 
+              expert craftsmanship, and seamless customization options, we transform spaces 
+              into stunning masterpieces!
+            </p>
+            <Link href="/contact" className="btn btn-outline-dark mt-4">Book Consult</Link>
+          </div>
+          <div className="services-grid-mini">
+            <div className="service-mini">
+              <h4>Kitchen</h4>
+              <p>Modern layouts & premium materials.</p>
             </div>
-            <Link href="/services" className="btn btn-outline-dark">View All Services</Link>
+            <div className="service-mini">
+              <h4>Bedroom</h4>
+              <p>Transforming rooms into sanctuaries.</p>
+            </div>
+            <div className="service-mini">
+              <h4>2D/3D Layouts</h4>
+              <p>Professional visualization.</p>
+            </div>
+            <div className="service-mini">
+              <h4>Custom Solutions</h4>
+              <p>Furniture & decor planning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. BEST GALLERY (Latest Projects) */}
+      <section className="gallery-section bg-light">
+        <div className="container">
+          <div className="section-header-center">
+            <span className="section-subtitle">Best Gallery</span>
+            <h2>Interior Design Styles</h2>
           </div>
           
-          <div className="services-grid">
-            <div className="service-card">
-              <div className="service-icon">🏛️</div>
-              <h3>Architecture</h3>
-              <p>Comprehensive architectural services from concept to execution.</p>
+          <div className="masonry-gallery">
+            <div className="gallery-item large">
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" alt="Industrial" />
+              <div className="gallery-overlay">
+                <h3>Industrial</h3>
+                <span className="cat">Interior</span>
+              </div>
             </div>
-            <div className="service-card">
-              <div className="service-icon">🛋️</div>
-              <h3>Interior Design</h3>
-              <p>Tailored interiors that reflect your personality and lifestyle.</p>
+            <div className="gallery-item">
+              <img src="https://images.unsplash.com/photo-1512918766671-ad650b9b73ad?auto=format&fit=crop&q=80&w=800" alt="Mediterranean" />
+              <div className="gallery-overlay">
+                <h3>Mediterranean</h3>
+                <span className="cat">Interior</span>
+              </div>
             </div>
-            <div className="service-card">
-              <div className="service-icon">📐</div>
-              <h3>2D/3D Layouts</h3>
-              <p>Photorealistic visualizations of your future space.</p>
+            <div className="gallery-item">
+              <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&q=80&w=800" alt="Rustic" />
+              <div className="gallery-overlay">
+                <h3>Rustic</h3>
+                <span className="cat">Interior</span>
+              </div>
             </div>
-            <div className="service-card">
-              <div className="service-icon">✨</div>
-              <h3>Custom Solutions</h3>
-              <p>Bespoke furniture and specific requirements handled perfectly.</p>
+            <div className="gallery-item">
+              <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800" alt="Minimalism" />
+              <div className="gallery-overlay">
+                <h3>Minimalism</h3>
+                <span className="cat">Interior</span>
+              </div>
             </div>
+          </div>
+          
+          <div className="center-action mt-5">
+            <Link href="/projects" className="btn btn-outline-dark">See All Projects</Link>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="featured-projects container">
-        <div className="section-header-center">
-          <span className="section-label">Portfolio</span>
-          <h2>Latest Masterpieces</h2>
-        </div>
-        
-        <div className="portfolio-grid">
-          <div className="portfolio-item large">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" alt="Villa" />
-            <div className="item-overlay">
-              <div className="item-text">
-                <h3>Minimalist Villa</h3>
-                <span>Residential • Pune</span>
+      {/* 5. CLIENT FEEDBACK (Testimonial Slider) */}
+      <section className="testimonial-section">
+        <div className="container">
+          <div className="testimonial-wrapper">
+            <div className="section-header-center">
+              <span className="section-subtitle gold-text">Client Feedback</span>
+              <h2 className="text-white">Hear from our clients.</h2>
+              <div className="rating-box">
+                <span className="stars">★★★★★</span>
+                <span className="score">4.82</span>
+                <span className="reviews">(2,488 Ratings)</span>
               </div>
             </div>
-          </div>
-          <div className="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1512918766671-ad650b9b73ad?auto=format&fit=crop&q=80&w=800" alt="Loft" />
-            <div className="item-overlay">
-              <div className="item-text">
-                <h3>Industrial Loft</h3>
-                <span>Commercial</span>
-              </div>
+
+            <div className="testimonial-slider">
+              {testimonials.map((test, index) => (
+                <div 
+                  key={index} 
+                  className={`testimonial-slide ${index === currentTestimonial ? "active" : ""}`}
+                >
+                  <p className="quote">"{test.text}"</p>
+                  <h4 className="author">— {test.author}</h4>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&q=80&w=800" alt="Deco" />
-            <div className="item-overlay">
-              <div className="item-text">
-                <h3>Art Deco Nook</h3>
-                <span>Residential</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="center-action">
-          <Link href="/projects" className="btn btn-primary">Explore Full Portfolio</Link>
         </div>
       </section>
 
       <style>{`
-        /* Global Home Styles */
+        /* Global & Utility */
         .home-wrapper {
           background-color: var(--background);
+          overflow-x: hidden;
         }
 
-        .section-label {
+        .section-subtitle {
           display: block;
           color: var(--primary);
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 2px;
-          font-size: 0.85rem;
+          letter-spacing: 3px;
+          font-size: 0.8rem;
           margin-bottom: 1rem;
         }
 
-        .link-arrow {
-          display: inline-block;
-          margin-top: 1.5rem;
-          color: var(--primary);
-          font-weight: 600;
-          text-decoration: none;
-          transition: transform 0.3s ease;
+        .gold-text {
+          color: #d4af37;
         }
-        
-        .link-arrow:hover {
-          transform: translateX(5px);
-        }
+
+        .bg-dark { background-color: #111; }
+        .bg-light { background-color: #f9f9f9; }
+        .text-white { color: white; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 4rem; }
+        .center-action { text-align: center; }
 
         /* Buttons */
         .btn {
-          padding: 1rem 2.5rem;
-          border-radius: 4px;
-          font-weight: 500;
-          transition: all 0.3s ease;
+          padding: 1.2rem 2.5rem;
+          border-radius: 0;
+          font-weight: 600;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           cursor: pointer;
           display: inline-block;
           text-decoration: none;
-          font-size: 0.95rem;
-          letter-spacing: 0.5px;
+          font-size: 0.9rem;
+          letter-spacing: 1px;
+          text-transform: uppercase;
         }
 
-        .btn-primary {
+        .btn-gold {
           background-color: var(--primary);
           color: white;
           border: 1px solid var(--primary);
         }
 
-        .btn-primary:hover {
+        .btn-gold:hover {
           background-color: transparent;
           color: white;
         }
 
-        .btn-outline {
+        .btn-transparent {
           background-color: transparent;
           color: white;
-          border: 1px solid white;
+          border: 1px solid rgba(255,255,255,0.5);
         }
 
-        .btn-outline:hover {
+        .btn-transparent:hover {
           background-color: white;
-          color: var(--foreground);
+          color: black;
         }
 
         .btn-outline-dark {
@@ -240,18 +303,18 @@ export default function Home() {
 
         .btn-outline-dark:hover {
           background-color: var(--foreground);
-          color: var(--background);
+          color: white;
         }
 
-        /* Hero Slider */
-        .hero-slider {
+        /* 1. Hero Slider */
+        .hero-section {
           height: 100vh;
           width: 100%;
           position: relative;
-          overflow: hidden;
+          background-color: black;
         }
 
-        .slide {
+        .hero-slide {
           position: absolute;
           top: 0;
           left: 0;
@@ -260,44 +323,57 @@ export default function Home() {
           background-size: cover;
           background-position: center;
           opacity: 0;
-          transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 5s ease-out;
-          transform: scale(1.05);
-          display: flex;
-          align-items: center;
+          transition: opacity 1.5s ease-in-out;
+          z-index: 0;
         }
 
-        .slide.active {
+        .hero-slide.active {
           opacity: 1;
-          transform: scale(1);
           z-index: 1;
         }
 
-        .slide-content {
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-top: 5rem;
           color: white;
           max-width: 800px;
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 1s ease 0.5s;
         }
 
-        .slide.active .slide-content {
-          opacity: 1;
-          transform: translateY(0);
+        .hero-tagline {
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          color: var(--primary);
+          margin-bottom: 1.5rem;
+          display: block;
         }
 
-        .slide-title {
-          font-size: 4.5rem;
+        .hero-title {
+          font-size: 5rem;
           font-weight: 300;
           line-height: 1.1;
           margin-bottom: 1.5rem;
-          letter-spacing: -1px;
+          font-family: serif;
         }
 
-        .slide-subtitle {
-          font-size: 1.5rem;
+        .hero-subtitle {
+          font-size: 1.2rem;
           font-weight: 300;
           margin-bottom: 3rem;
           opacity: 0.9;
+          max-width: 600px;
+          line-height: 1.6;
         }
 
         .hero-actions {
@@ -305,255 +381,324 @@ export default function Home() {
           gap: 1.5rem;
         }
 
-        .slider-nav {
+        /* Hero Animations */
+        .fade-up-1, .fade-up-2, .fade-up-3, .fade-up-4 {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        .hero-slide.active .fade-up-1 { animation: fadeUp 0.8s ease forwards 0.3s; }
+        .hero-slide.active .fade-up-2 { animation: fadeUp 0.8s ease forwards 0.5s; }
+        .hero-slide.active .fade-up-3 { animation: fadeUp 0.8s ease forwards 0.7s; }
+        .hero-slide.active .fade-up-4 { animation: fadeUp 0.8s ease forwards 0.9s; }
+
+        @keyframes fadeUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slider-indicators {
           position: absolute;
           bottom: 3rem;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
-          gap: 1rem;
+          gap: 12px;
           z-index: 10;
         }
 
-        .nav-dot {
-          width: 12px;
-          height: 12px;
+        .indicator-dot {
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.3);
-          border: 2px solid transparent;
+          background: rgba(255, 255, 255, 0.4);
+          border: none;
           cursor: pointer;
           transition: all 0.3s ease;
           padding: 0;
         }
 
-        .nav-dot.active {
-          background: transparent;
-          border-color: white;
-          transform: scale(1.3);
+        .indicator-dot.active {
+          background: white;
+          transform: scale(1.5);
         }
 
-        /* About Overview */
-        .about-overview {
+        /* 2. Stats Section */
+        .stats-section {
+          padding: 7rem 0;
+          background-image: linear-gradient(rgba(17,17,17,0.95), rgba(17,17,17,0.95)), url('https://images.unsplash.com/photo-1541888081-30cb334f55db?auto=format&fit=crop&q=80&w=2000');
+          background-attachment: fixed;
+          background-position: center;
+        }
+
+        .stats-header {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto 5rem;
+        }
+
+        .stats-header h2 {
+          font-size: 2.8rem;
+          font-weight: 300;
+          margin-bottom: 1.5rem;
+          font-family: serif;
+        }
+
+        .stats-header p {
+          color: #aaa;
+          line-height: 1.8;
+          font-size: 1.1rem;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 2rem;
+          text-align: center;
+        }
+
+        .stat-box {
+          padding: 2rem;
+          border: 1px solid rgba(255,255,255,0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+          transform: translateY(-10px);
+          border-color: var(--primary);
+        }
+
+        .stat-number {
+          display: block;
+          font-size: 3.5rem;
+          font-weight: 300;
+          color: var(--primary);
+          margin-bottom: 0.5rem;
+          font-family: serif;
+        }
+
+        .stat-label {
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #ccc;
+        }
+
+        /* 3. Services Layout */
+        .services-section {
           padding: 8rem 2rem;
+        }
+
+        .two-col-layout {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 6rem;
           align-items: center;
         }
 
-        .about-content h2 {
-          font-size: 2.8rem;
-          font-weight: 300;
-          line-height: 1.2;
+        .text-col h2 {
+          font-size: 3rem;
+          font-family: serif;
           margin-bottom: 1.5rem;
+          font-weight: 300;
         }
 
-        .about-content p {
-          font-size: 1.1rem;
-          color: #666;
+        .lead-text {
+          font-size: 1.15rem;
           line-height: 1.8;
+          color: #555;
         }
 
-        .about-stats {
+        .services-grid-mini {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 3rem;
         }
 
-        .stat {
-          display: flex;
-          flex-direction: column;
+        .service-mini {
+          padding-left: 1.5rem;
+          border-left: 2px solid var(--primary);
         }
 
-        .stat-num {
-          font-size: 3.5rem;
-          font-weight: 300;
-          color: var(--primary);
-          line-height: 1;
+        .service-mini h4 {
+          font-size: 1.2rem;
           margin-bottom: 0.5rem;
         }
 
-        .stat-label {
+        .service-mini p {
+          color: #666;
           font-size: 0.9rem;
-          color: #666;
-          text-transform: uppercase;
-          letter-spacing: 1px;
         }
 
-        /* Services Section */
-        .services-section {
-          background-color: #f9f9f7;
-          padding: 8rem 2rem;
-        }
-
-        .section-header-inline {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          margin-bottom: 5rem;
-        }
-
-        .section-header-inline h2 {
-          font-size: 2.5rem;
-          font-weight: 300;
-        }
-
-        .services-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 2rem;
-        }
-
-        .service-card {
-          background: white;
-          padding: 3rem 2rem;
-          border: 1px solid #eee;
-          transition: all 0.4s ease;
-        }
-
-        .service-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-          border-color: transparent;
-        }
-
-        .service-icon {
-          font-size: 2.5rem;
-          margin-bottom: 2rem;
-        }
-
-        .service-card h3 {
-          font-size: 1.3rem;
-          margin-bottom: 1rem;
-          font-weight: 500;
-        }
-
-        .service-card p {
-          color: #666;
-          font-size: 0.95rem;
-          line-height: 1.6;
-        }
-
-        /* Featured Projects */
-        .featured-projects {
-          padding: 8rem 2rem;
+        /* 4. Masonry Gallery */
+        .gallery-section {
+          padding: 8rem 0;
         }
 
         .section-header-center {
           text-align: center;
-          margin-bottom: 5rem;
-        }
-
-        .section-header-center h2 {
-          font-size: 2.5rem;
-          font-weight: 300;
-        }
-
-        .portfolio-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          grid-auto-rows: 400px;
-          gap: 1.5rem;
           margin-bottom: 4rem;
         }
 
-        .portfolio-item {
-          position: relative;
-          overflow: hidden;
+        .section-header-center h2 {
+          font-size: 3rem;
+          font-weight: 300;
+          font-family: serif;
         }
 
-        .portfolio-item.large {
+        .masonry-gallery {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 300px;
+          gap: 1.5rem;
+        }
+
+        .gallery-item {
+          position: relative;
+          overflow: hidden;
+          background: #000;
+        }
+
+        .gallery-item.large {
+          grid-column: span 2;
           grid-row: span 2;
         }
 
-        .portfolio-item img {
+        .gallery-item img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.8s ease;
+          opacity: 0.8;
+          transition: transform 0.8s ease, opacity 0.4s ease;
         }
 
-        .portfolio-item:hover img {
+        .gallery-item:hover img {
           transform: scale(1.05);
-        }
-
-        .item-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%);
-          display: flex;
-          align-items: flex-end;
-          padding: 3rem;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .portfolio-item:hover .item-overlay {
           opacity: 1;
         }
 
-        .item-text {
+        .gallery-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 2rem;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
           color: white;
           transform: translateY(20px);
-          transition: transform 0.4s ease;
+          opacity: 0;
+          transition: all 0.4s ease;
         }
 
-        .portfolio-item:hover .item-text {
+        .gallery-item:hover .gallery-overlay {
           transform: translateY(0);
+          opacity: 1;
         }
 
-        .item-text h3 {
-          font-size: 1.8rem;
+        .gallery-overlay h3 {
+          font-size: 1.5rem;
           font-weight: 400;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
         }
 
-        .item-text span {
-          font-size: 0.9rem;
+        .gallery-overlay .cat {
+          font-size: 0.8rem;
+          color: var(--primary);
           text-transform: uppercase;
           letter-spacing: 1px;
-          color: var(--primary);
         }
 
-        .center-action {
-          text-align: center;
+        /* 5. Testimonial Slider */
+        .testimonial-section {
+          background-color: #1a1a1a;
+          padding: 8rem 0;
+          position: relative;
         }
 
-        .center-action .btn-primary:hover {
-          background-color: var(--foreground);
-          border-color: var(--foreground);
+        .testimonial-wrapper {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .rating-box {
+          margin-top: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .stars {
+          color: #d4af37;
+          font-size: 1.5rem;
+        }
+        
+        .score {
           color: white;
+          font-weight: bold;
+          font-size: 1.2rem;
         }
 
-        /* Responsive */
+        .reviews {
+          color: #888;
+          font-size: 0.9rem;
+        }
+
+        .testimonial-slider {
+          position: relative;
+          min-height: 250px;
+          margin-top: 4rem;
+        }
+
+        .testimonial-slide {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          opacity: 0;
+          transform: scale(0.95);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          visibility: hidden;
+        }
+
+        .testimonial-slide.active {
+          opacity: 1;
+          transform: scale(1);
+          visibility: visible;
+        }
+
+        .quote {
+          color: white;
+          font-size: 1.8rem;
+          font-style: italic;
+          font-weight: 300;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+          font-family: serif;
+        }
+
+        .author {
+          color: var(--primary);
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+
+        /* Responsive Design */
         @media (max-width: 1024px) {
-          .about-overview {
-            grid-template-columns: 1fr;
-            gap: 4rem;
-          }
-          .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .two-col-layout { grid-template-columns: 1fr; gap: 4rem; }
+          .masonry-gallery { grid-template-columns: repeat(2, 1fr); }
+          .gallery-item.large { grid-column: span 1; grid-row: span 1; }
         }
 
         @media (max-width: 768px) {
-          .slide-title {
-            font-size: 3rem;
-          }
-          .hero-actions {
-            flex-direction: column;
-          }
-          .section-header-inline {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2rem;
-          }
-          .portfolio-grid {
-            grid-template-columns: 1fr;
-          }
-          .portfolio-item.large {
-            grid-row: span 1;
-          }
+          .hero-title { font-size: 3.5rem; }
+          .hero-actions { flex-direction: column; }
+          .btn { width: 100%; text-align: center; }
+          .services-grid-mini { grid-template-columns: 1fr; }
+          .masonry-gallery { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+          .quote { font-size: 1.4rem; }
         }
       `}</style>
     </main>
