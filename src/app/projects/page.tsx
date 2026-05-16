@@ -1,206 +1,93 @@
-"use client";
-import { useState } from "react";
+import Topbar from "@/components/Topbar";
+import Navbar from "@/components/Navbar";
+import ContactBar from "@/components/ContactBar";
+import Footer from "@/components/Footer";
+import Link from "next/link";
+
+export const metadata = {
+  title: "Our Projects | Hauspire - Interior Design Portfolio",
+  description: "Browse Hauspire's portfolio of stunning interior design projects across residential and commercial spaces in Pune.",
+};
+
+const projects = [
+  { img: "portfolio-1.jpg", name: "Modern Living Room", cat: "first" },
+  { img: "portfolio-2.jpg", name: "Elegant Bedroom", cat: "second" },
+  { img: "portfolio-3.jpg", name: "Contemporary Kitchen", cat: "third" },
+  { img: "portfolio-4.jpg", name: "Luxury Bathroom", cat: "first" },
+  { img: "portfolio-5.jpg", name: "Office Interior", cat: "second" },
+  { img: "portfolio-6.jpg", name: "Dining Space", cat: "third" },
+];
 
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState("All");
-
-  const projects = [
-    { title: "Industrial Loft", category: "Industrial", image: "https://images.unsplash.com/photo-1512918766671-ad650b9b73ad?auto=format&fit=crop&q=80&w=800" },
-    { title: "Mediterranean Villa", category: "Mediterranean", image: "https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&q=80&w=800" },
-    { title: "Rustic Cottage", category: "Rustic", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800" },
-    { title: "Minimalist Studio", category: "Minimalism", image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800" },
-    { title: "Contemporary Condo", category: "Contemporary", image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80&w=800" },
-    { title: "Modern Workspace", category: "Modern", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" },
-    { title: "Coastal Retreat", category: "Coastal", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" },
-    { title: "Bohemian Living", category: "Bohemian", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=800" }
-  ];
-
-  const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
-
-  const filteredProjects = filter === "All" 
-    ? projects 
-    : projects.filter(p => p.category === filter);
-
   return (
-    <main className="projects-page">
-      <section className="page-header">
-        <div className="container">
-          <h1>Our Projects</h1>
-          <p>Explore our diverse portfolio of stunning interior designs.</p>
-        </div>
-      </section>
+    <>
+      <Topbar />
+      <Navbar />
+      <ContactBar />
 
-      <section className="projects-section container">
-        <div className="filter-bar">
-          {categories.map(cat => (
-            <button 
-              key={cat} 
-              className={`filter-btn ${filter === cat ? "active" : ""}`}
-              onClick={() => setFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <div key={index} className="project-card glass-panel animate-in">
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-overlay">
-                  <span>View Project</span>
-                </div>
-              </div>
-              <div className="project-info">
-                <span className="project-category">{project.category}</span>
-                <h3>{project.title}</h3>
+      {/* Page Header */}
+      <div className="container-fluid bg-secondary py-5">
+        <div className="container py-5">
+          <div className="row align-items-center py-4">
+            <div className="col-md-6 text-center text-md-left">
+              <h1 className="mb-4 mb-md-0 text-primary text-uppercase">Our Projects</h1>
+            </div>
+            <div className="col-md-6 text-center text-md-right">
+              <div className="d-inline-flex align-items-center">
+                <Link className="btn btn-outline-primary" href="/">Home</Link>
+                <i className="fas fa-angle-double-right text-primary mx-2"></i>
+                <a className="btn btn-outline-primary disabled" href="#">Our Projects</a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </section>
+      </div>
 
-      <style>{`
-        .projects-page {
-          padding-bottom: 5rem;
-        }
+      {/* Projects */}
+      <div className="container-fluid py-5">
+        <div className="container py-5">
+          <div className="row justify-content-center">
+            <div className="col-lg-6 col-md-8 col text-center mb-4">
+              <h6 className="text-primary font-weight-normal text-uppercase mb-3">Our Projects</h6>
+              <h1 className="mb-4">Some Of Our Awesome Interior Designing Projects</h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 text-center mb-2">
+              <ul className="list-inline mb-4" id="portfolio-flters">
+                <li className="btn btn-outline-primary m-1 active" data-filter="*">All</li>
+                <li className="btn btn-outline-primary m-1" data-filter=".first">Complete</li>
+                <li className="btn btn-outline-primary m-1" data-filter=".second">Running</li>
+                <li className="btn btn-outline-primary m-1" data-filter=".third">Upcoming</li>
+              </ul>
+            </div>
+          </div>
+          <div className="row mx-1 portfolio-container">
+            {projects.map((item, i) => (
+              <div key={i} className={`col-lg-4 col-md-6 col-sm-12 p-0 portfolio-item ${item.cat}`}>
+                <div className="position-relative overflow-hidden">
+                  <div className="portfolio-img d-flex align-items-center justify-content-center">
+                    <img className="img-fluid" src={`/img/${item.img}`} alt={item.name} />
+                  </div>
+                  <div className="portfolio-text bg-secondary d-flex flex-column align-items-center justify-content-center">
+                    <h4 className="text-white mb-4">{item.name}</h4>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <a className="btn btn-outline-primary m-1" href="#">
+                        <i className="fa fa-link"></i>
+                      </a>
+                      <a className="btn btn-outline-primary m-1" href={`/img/${item.img}`} data-lightbox="portfolio">
+                        <i className="fa fa-eye"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-        .page-header {
-          padding: 10rem 0 5rem;
-          background-color: #f9f9f9;
-          text-align: center;
-        }
-
-        .page-header h1 {
-          font-size: 3rem;
-          margin-bottom: 1rem;
-        }
-
-        .filter-bar {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-          margin-bottom: 4rem;
-          padding: 0 1rem;
-        }
-
-        .filter-btn {
-          padding: 0.6rem 1.5rem;
-          border-radius: 50px;
-          border: 1px solid #ddd;
-          background: white;
-          cursor: pointer;
-          font-weight: 500;
-          transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover {
-          border-color: var(--primary);
-          color: var(--primary);
-        }
-
-        .filter-btn.active {
-          background: var(--primary);
-          color: white;
-          border-color: var(--primary);
-        }
-
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 3rem;
-          padding: 0 1rem;
-        }
-
-        .project-card {
-          overflow: hidden;
-          transition: transform 0.4s ease;
-        }
-
-        .project-card:hover {
-          transform: translateY(-10px);
-        }
-
-        .project-image {
-          position: relative;
-          height: 300px;
-          overflow: hidden;
-        }
-
-        .project-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s ease;
-        }
-
-        .project-card:hover .project-image img {
-          transform: scale(1.1);
-        }
-
-        .project-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0,0,0,0.4);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .project-card:hover .project-overlay {
-          opacity: 1;
-        }
-
-        .project-overlay span {
-          color: white;
-          border: 1px solid white;
-          padding: 0.8rem 2rem;
-          border-radius: 50px;
-          font-weight: 600;
-          backdrop-filter: blur(5px);
-        }
-
-        .project-info {
-          padding: 2rem;
-        }
-
-        .project-category {
-          font-size: 0.8rem;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          color: var(--primary);
-          font-weight: 700;
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-
-        .project-info h3 {
-          font-size: 1.5rem;
-          margin: 0;
-        }
-
-        .animate-in {
-          animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 576px) {
-          .projects-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
-    </main>
+      <Footer />
+    </>
   );
 }

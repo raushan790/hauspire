@@ -2,130 +2,67 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container footer-grid">
-        <div className="footer-brand">
-          <Link href="/" className="logo">HAUSPIRE</Link>
-          <p>
-            Designing thoughtful, livable spaces that blend style with functionality. 
-            Crafting environments you'll truly love to live in.
+    <>
+      <div className="container-fluid bg-dark text-white py-5 px-sm-3 px-md-5">
+        <div className="row pt-5">
+          <div className="col-lg-3 col-md-6 mb-5">
+            <h4 className="text-primary mb-4">Get In Touch</h4>
+            <p><i className="fa fa-map-marker-alt mr-2"></i>Pune, Maharashtra, India</p>
+            <p><i className="fa fa-phone-alt mr-2"></i>+91 766 664 5800</p>
+            <p><i className="fa fa-envelope mr-2"></i>hello@hauspire.com</p>
+            <div className="d-flex justify-content-start mt-4">
+              <a className="btn btn-outline-light rounded-circle text-center mr-2 px-0" style={{ width: 38, height: 38 }} href="#"><i className="fab fa-twitter"></i></a>
+              <a className="btn btn-outline-light rounded-circle text-center mr-2 px-0" style={{ width: 38, height: 38 }} href="#"><i className="fab fa-facebook-f"></i></a>
+              <a className="btn btn-outline-light rounded-circle text-center mr-2 px-0" style={{ width: 38, height: 38 }} href="#"><i className="fab fa-linkedin-in"></i></a>
+              <a className="btn btn-outline-light rounded-circle text-center mr-2 px-0" style={{ width: 38, height: 38 }} href="#"><i className="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-6 mb-5">
+            <h4 className="text-primary mb-4">Quick Links</h4>
+            <div className="d-flex flex-column justify-content-start">
+              <Link className="text-white mb-2" href="/"><i className="fa fa-angle-right mr-2"></i>Home</Link>
+              <Link className="text-white mb-2" href="/about"><i className="fa fa-angle-right mr-2"></i>About Us</Link>
+              <Link className="text-white mb-2" href="/services"><i className="fa fa-angle-right mr-2"></i>Our Services</Link>
+              <Link className="text-white mb-2" href="/projects"><i className="fa fa-angle-right mr-2"></i>Our Projects</Link>
+              <Link className="text-white" href="/contact"><i className="fa fa-angle-right mr-2"></i>Contact Us</Link>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-6 mb-5">
+            <h4 className="text-primary mb-4">Our Services</h4>
+            <div className="d-flex flex-column justify-content-start">
+              <Link className="text-white mb-2" href="/services"><i className="fa fa-angle-right mr-2"></i>Kitchen Design</Link>
+              <Link className="text-white mb-2" href="/services"><i className="fa fa-angle-right mr-2"></i>Bedroom Design</Link>
+              <Link className="text-white mb-2" href="/services"><i className="fa fa-angle-right mr-2"></i>Bathroom Design</Link>
+              <Link className="text-white mb-2" href="/services"><i className="fa fa-angle-right mr-2"></i>Living Room</Link>
+              <Link className="text-white" href="/services"><i className="fa fa-angle-right mr-2"></i>3D Visualization</Link>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-6 mb-5">
+            <h4 className="text-primary mb-4">Newsletter</h4>
+            <form action="">
+              <div className="form-group">
+                <input type="text" className="form-control border-0" placeholder="Your Name" required />
+              </div>
+              <div className="form-group">
+                <input type="email" className="form-control border-0" placeholder="Your Email" required />
+              </div>
+              <div>
+                <button className="btn btn-lg btn-primary btn-block border-0" type="submit">Submit Now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="container border-top border-secondary pt-5">
+          <p className="m-0 text-center text-white">
+            &copy; <Link className="text-white font-weight-bold" href="/">Hauspire</Link>. All Rights Reserved.
           </p>
         </div>
-        
-        <div className="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/services">Services</Link></li>
-            <li><Link href="/projects">Our Projects</Link></li>
-          </ul>
-        </div>
-
-        <div className="footer-links">
-          <h4>Services</h4>
-          <ul>
-            <li><Link href="/services#kitchen">Kitchen Design</Link></li>
-            <li><Link href="/services#bedroom">Bedroom Design</Link></li>
-            <li><Link href="/services#3d">3D/VR Visualization</Link></li>
-            <li><Link href="/services#remodel">Remodel Spaces</Link></li>
-          </ul>
-        </div>
-
-        <div className="footer-contact">
-          <h4>Contact Us</h4>
-          <p>Pune, Maharashtra, India</p>
-          <p>Email: hello@hauspire.com</p>
-          <p>Phone: +91 766 664 5800</p>
-        </div>
-      </div>
-      
-      <div className="footer-bottom">
-        <div className="container">
-          <p>&copy; {new Date().getFullYear()} Hauspire. All rights reserved.</p>
-        </div>
       </div>
 
-      <style>{`
-        .footer {
-          background-color: #111;
-          color: #eee;
-          padding: 5rem 0 2rem;
-          margin-top: 5rem;
-        }
-
-        .footer-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: 4rem;
-        }
-
-        .footer-brand .logo {
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: 1.5rem;
-          display: block;
-        }
-
-        .footer-brand p {
-          color: #999;
-          font-size: 0.95rem;
-          line-height: 1.7;
-        }
-
-        .footer h4 {
-          color: white;
-          margin-bottom: 1.5rem;
-          font-size: 1.1rem;
-        }
-
-        .footer ul {
-          list-style: none;
-        }
-
-        .footer ul li {
-          margin-bottom: 0.75rem;
-        }
-
-        .footer ul li a {
-          color: #999;
-          transition: color 0.3s ease;
-          font-size: 0.95rem;
-        }
-
-        .footer ul li a:hover {
-          color: var(--primary);
-        }
-
-        .footer-contact p {
-          color: #999;
-          margin-bottom: 0.75rem;
-          font-size: 0.95rem;
-        }
-
-        .footer-bottom {
-          margin-top: 5rem;
-          padding-top: 2rem;
-          border-top: 1px solid #222;
-          text-align: center;
-          color: #666;
-          font-size: 0.85rem;
-        }
-
-        @media (max-width: 992px) {
-          .footer-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-          }
-        }
-      `}</style>
-    </footer>
+      {/* Back to Top */}
+      <a href="#" className="btn btn-lg btn-primary back-to-top">
+        <i className="fa fa-angle-double-up"></i>
+      </a>
+    </>
   );
 }
